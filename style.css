@@ -90,14 +90,9 @@ canvas {
   margin-right: auto;
   background: #222;
 }
-body {
-  margin: 0;
-  background: #111;
-}
-
 canvas {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  background: #222;
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background: #222 !important;
 }
