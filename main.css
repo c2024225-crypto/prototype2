@@ -1,13 +1,81 @@
+:root{
+  /* Themeable values */
+  --btn-size: 3rem;                 /* base size (use rem for scaling) */
+  --btn-offset: 1.25rem;            /* distance from edges */
+  --btn-bg: #c62828;                /* primary background (check contrast) */
+  --btn-bg-hover: #b71c1c;
+  --btn-foreground: #ffffff;
+  --btn-focus-ring: rgba(198,40,40,0.25);
+  --btn-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Corner floating button: fixed so it remains in viewport on scroll */
 .redButton {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  width: 50px;
-  height: 50px;
-  background: red;
+  position: fixed;
+  right: var(--btn-offset);
+  top: var(--btn-offset);
+  width: var(--btn-size);
+  height: var(--btn-size);
+  min-width: 44px;                 /* minimum touch target for accessibility */
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  background: var(--btn-bg);
+  color: var(--btn-foreground);
   border: none;
   border-radius: 50%;
-  color: white;
-  font-size: 24px;
+
+  font-size: 1.25rem;              /* use rem-based sizing */
+  line-height: 1;
   cursor: pointer;
+  touch-action: manipulation;      /* improves mobile interaction */
+
+  box-shadow: var(--btn-shadow);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+  z-index: 1000;                   /* ensure it's above content */
+}
+
+/* Hover / active states */
+.redButton:hover {
+  background: var(--btn-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+}
+.redButton:active {
+  transform: translateY(0);
+}
+
+/* Focus accessibility - prefer :focus-visible to avoid visual noise */
+.redButton:focus {
+  outline: none;
+}
+.redButton:focus-visible {
+  box-shadow: 0 0 0 4px var(--btn-focus-ring);
+}
+
+/* Disabled state */
+.redButton[aria-disabled="true"],
+.redButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .redButton {
+    transition: none;
+  }
+}
+
+/* Responsive adjustments if you want different offsets/sizes on small screens */
+@media (max-width: 420px) {
+  :root {
+    --btn-offset: 0.75rem;
+    --btn-size: 3.25rem; /* keep touch target comfortable on phones */
+  }
 }
