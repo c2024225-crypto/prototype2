@@ -48,13 +48,3 @@ for (let row = 0; row < 8; row++) {
     addPin(80 + col * 40 + offset, 100 + row * 40);
   }
 }
-
-// クリックで玉を落とす
-canvas.addEventListener("click", () => {
-  const ball = Bodies.circle(200, 50, 7, {
-    restitution: 0.6,
-    friction: 0.01,
-    render: { fillStyle: "#ffcc00" }
-  });
-  Composite.add(world, ball);
-});
